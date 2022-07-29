@@ -1,0 +1,29 @@
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+     3   53.363 MiB   53.363 MiB           1   @profile
+     4                                         def modified_gram_smith_arquivo(A):
+     5                                         
+     6                                         
+     7                                           ## CAPTA O NÚMERO DE LINHAS E COLUNAS DE A
+     8   53.363 MiB    0.000 MiB           1     num_linhas = np.shape(A)[0]
+     9   53.363 MiB    0.000 MiB           1     num_colunas = np.shape(A)[1]
+    10                                         
+    11                                           #CRIA MATRIZES Q,R
+    12   53.363 MiB    0.000 MiB       10303     Q = np.array([[0 for j in range(num_colunas)] for w in range(num_linhas)], dtype = 'float')
+    13   53.574 MiB    0.211 MiB       10303     R = np.array([[0 for j in range(num_colunas)] for w in range(num_colunas)], dtype = 'float')
+    14                                         
+    15                                           #PERCORRE COLUNAS
+    16   53.574 MiB    0.000 MiB         101     for k in range(num_colunas):
+    17                                         
+    18                                             #IGUALA COLUNA DE Q COM A DE A
+    19   53.574 MiB    0.000 MiB         100       Q[:,k] = A[:,k]
+    20                                         
+    21   53.574 MiB    0.000 MiB        5050       for i in range(k):
+    22                                         
+    23   53.574 MiB    0.000 MiB        4950         R[i,k] = np.matmul(np.transpose(Q[:,i]),Q[:,k])
+    24   53.574 MiB    0.000 MiB        4950         Q[:,k] = Q[:,k] - R[i,k]*Q[:,i]
+    25                                             
+    26   53.574 MiB    0.000 MiB         100       R[k,k] = np.linalg.norm(Q[:,k])
+    27   53.574 MiB    0.000 MiB         100       Q[:,k] = Q[:,k]/R[k,k]
+    28                                         
+    29   53.574 MiB    0.000 MiB           1     return Q,R
